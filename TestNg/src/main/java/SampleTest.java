@@ -21,7 +21,7 @@ public class SampleTest extends SampleBaseDriver {
     }
 
     /**
-     * Simple test method we use are geter from adress clase to get adress.
+     * Simple test method we use are getter from address clase to get address.
      */
     @Test(description = "Going to site")
     public void step01() {
@@ -29,7 +29,7 @@ public class SampleTest extends SampleBaseDriver {
     }
 
     /**
-     * Simple test method like  above. But we use are geter from user clase to get adress.
+     * Simple test method like  above. But we use are getter from user clase to get address.
      */
     @Test(description = "Send data from base")
     public void step02(){

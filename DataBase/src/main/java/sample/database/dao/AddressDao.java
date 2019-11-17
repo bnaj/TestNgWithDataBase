@@ -1,7 +1,6 @@
 package sample.database.dao;
 
-import sample.database.entities.Adress;
-import sample.database.entities.User;
+import sample.database.entities.Address;
 import sample.database.sql.ComunicationWithBase;
 
 import java.sql.Connection;
@@ -11,22 +10,22 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdressDao implements AdressInterfaceDao{
+public class AddressDao implements AddressInterfaceDao {
 
     /**
-     * This method provide adress from other database by userId.
+     * This method provide address from other database by userId.
      * @param userId provide user id.
      * @param baseName provide name of base where user is.
      */
-    public Adress getAdressByUserId(long userId, String baseName){
+    public Address getAddressByUserId(long userId, String baseName){
         Connection connection = ComunicationWithBase.connect(baseName);
         try(Statement statment = connection.createStatement()){
             ResultSet resultSets = statment.executeQuery("SELECT * FROM adress WHERE userId=" + userId);
             if(resultSets.next()){
-                Adress adress = new Adress();
-                adress.setFirst(resultSets.getString("adress"));
+                Address address = new Address();
+                address.setFirst(resultSets.getString("address"));
 
-                return adress;
+                return address;
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -36,21 +35,21 @@ public class AdressDao implements AdressInterfaceDao{
     }
 
     /**
-     * This method provide list of Adress object.
+     * This method provide list of Address object.
      * @param baseName provide name of base where user is.
      */
     @Override
-    public List<Adress> getAllAdressByUserId(String baseName) {
+    public List<Address> getAllAdressByUserId(String baseName) {
         Connection connection = ComunicationWithBase.connect(baseName);
         try(Statement statment = connection.createStatement()){
-            List<Adress>adress = new ArrayList<>();
-            ResultSet resultSets = statment.executeQuery("SELECT * FROM adress");
+            List<Address> addresses = new ArrayList<>();
+            ResultSet resultSets = statment.executeQuery("SELECT * FROM addresses");
             while (resultSets.next()) {
-                Adress adres = new Adress();
-                adres.setFirst(resultSets.getString("firstAdres"));
-                adress.add(adres);
+                Address address = new Address();
+                address.setFirst(resultSets.getString("firstAdres"));
+                addresses.add(address);
             }
-            return adress;
+            return addresses;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

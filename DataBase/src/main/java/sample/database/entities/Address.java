@@ -1,13 +1,13 @@
 package sample.database.entities;
 
-public class Adress {
+public class Address {
 
     private String first;
 
-    public Adress(){
+    public Address(){
     }
 
-    public Adress(String first){
+    public Address(String first){
         this.first = first;
     }
 

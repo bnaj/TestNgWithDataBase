@@ -6,8 +6,6 @@ import org.openqa.selenium.support.PageFactory;
 
 public class PageObject {
 
-    public WebDriver driver;
-
     PageObject( WebDriver driver){
         PageFactory.initElements(driver,this);
     }
