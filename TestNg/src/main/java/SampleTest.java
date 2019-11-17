@@ -1,3 +1,4 @@
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import sample.database.dao.AdressDao;
 import sample.database.dao.UserDao;
@@ -13,7 +14,7 @@ public class SampleTest extends SampleBaseDriver {
     /**
      * In this method we initialize data from data base.
      */
-    @Test(description = "Initialize data")
+    @BeforeClass(description = "Initialize data")
     public void step00(){
         object = new PageObject(driver.getWebDriver());
         userData = new UserDao().getUserById(1,"testData");
