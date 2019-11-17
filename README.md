@@ -36,17 +36,12 @@ To storage data we use SQLite project. It allows us to avoid running database se
 
 To provide driver for SQLite I use maven dependencies:
 
-&lt;!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc --&gt;
-
-&lt;dependency&gt;
-
-&lt;groupId&gt;org.xerial&lt;/groupId&gt;
-
-&lt;artifactId&gt;sqlite-jdbc&lt;/artifactId&gt;
-
-&lt;version&gt;3.28.0&lt;/version&gt;
-
-&lt;/dependency&gt;
+     <!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.28.0</version>
+        </dependency>
 
 You can also use jar.
 
@@ -67,27 +62,27 @@ And now in package sql we have one class:
 
 ComunicationWithBase – this class have one method responsible for connection with database.
 
-Package entities stores a data model of object like in class *User*. We have fields, getter and setter e.g:
+Package entities stores a data model of object like in class `User`. We have fields, getter and setter e.g:
 
-private String login;
+    private String login;
 
-public void setUserId(int userId){
+    public void setUserId(int userId){
 
- this.userId = userId;
+    this.userId = userId;
 
- }
+    }
 
-public String getLogin(){
+    public String getLogin(){
 
- return login;
+    return login;
 
- }
+    }
 
 In this class has also a constructor with and without attributes.
 
 (If you want to force all fields to be filled use constructor with all fields.)
 
-Second class *Address* have the same function like *User*.
+Second class `Address` have the same function like `User`.
 
 Package dao provides data from database. Have 2 interfaces and 2 classes which implements interfaces.
 
@@ -95,47 +90,48 @@ Interfaces are used here only in role of contract.
 
 In classes we have 2 methods: one provides data by using user id and second which provides all data.
 
-In class *UserDao* and in method *getUserDataById* we can see fragment where we create user with data from base:
+In class `UserDao` and in method `getUserDataById` we can see fragment where we create user with data from base:
 
-User user = new User();
+    User user = new User();
 
- user.setUserId(resultSets.getInt("userId"));
+    user.setUserId(resultSets.getInt("userId"));
 
- user.setLogin(resultSets.getString("login"));
+    user.setLogin(resultSets.getString("login"));
 
- user.setName(resultSets.getString("name"));
+    user.setName(resultSets.getString("name"));
 
- user.setAge(resultSets.getInt("age"));
+    user.setAge(resultSets.getInt("age"));
+ 
 
-As you see, we use setter from *User* Class. This method return *User* object that we can later use.
+As you see, we use setter from `User` Class. This method return `User` object that we can later use.
 
 **How we use it?**
 
-How I use it? In module *TestNg* and class *SmapleTest* we have fields like:
+How I use it? In module `TestNg` and class `SmapleTest` we have fields like:
 
 User userData;
 
 Address addressData;
 
-I’ declare object *User* and *Adress*, next I initialize these fields in test method *step00*. For this purpose, I call method from *UserDao* and *AdressDao*. First argument is *userId* and second is *baseName*
+I’ declare object `User` and `Adress`, next I initialize these fields in test method with BeforeClass adnotaion `step00`. For this purpose, I call method from `UserDao` and `AdressDao`. First argument is `userId` and second is `baseName`
 
- * public void step00(){*
+    public void step00(){
 
- object = new PageObject(driver.getWebDriver());
+    object = new PageObject(driver.getWebDriver());
 
- userData = new UserDao().getUserById(1,"testData");
+    userData = new UserDao().getUserById(1,"testData");
 
- addressData = new AddressDao().getAddressByUserId(2,"testData");
+    addressData = new AddressDao().getAddressByUserId(2,"testData");
 
- }
+    }
 
 Now we have object with data, we can use it very simple like in test method step01:
 
-*public void step01() {*
+    public void step01() {
 
- driver.getWebDriver().get(addressData.getFirst());
+    driver.getWebDriver().get(addressData.getFirst());
 
- }
+    }
 
 As you can see, to provide www address I just use getter from Address class.
 
